@@ -14,49 +14,59 @@ import java.time.format.DateTimeFormatter;
 
 @Controller
 public class HelloController {
-	@GetMapping ("/input")
-	public String input(Model model) {
-		model.addAttribute("fdat", new FDat());
+	@GetMapping ("/language-age")
+	public String languageAge(Model model) {
+		model.addAttribute("languageAge", new FDat());
 		return "tmp_input";
 	}
 
-	@PostMapping ("/result")
-	public String result(
-		@ModelAttribute FDat fdat, Model model
+	@PostMapping ("/self-introduction")
+	public String selfIntroduction(
+		@ModelAttribute FDat languageAge, Model model
 	) {
-		setGreetingAndTodayDate(fdat);
-		model.addAttribute("fdat", fdat);
+		setGreeting(languageAge);
+		setTodayDate(languageAge);
+		model.addAttribute("languageAge", languageAge);
 		return "tmp_result";
 	}
-	private void setGreetingAndTodayDate(FDat fdat) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	private void setGreeting(FDat languageAge) {
 		String isGreeting = "";
-		String ope = fdat.getOpe();
-		String todayDate = "";
+		String ope = languageAge.getOpe();
 		switch (ope) {
 			case "JAPAN" -> {
 				isGreeting = "こんにちは〜！";
-				ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
-				todayDate = LocalDateTime.now().format(dtf);
 			}
 			case "USA" -> {
 				isGreeting = "ハロ〜！";
+			}
+			case "FRANCE" -> {
+				isGreeting = "ボンジュ〜ル！";
+			}
+			case "KOREAN" -> {
+				isGreeting = "アニハセヨ〜！";
+			}
+		}
+		languageAge.setIsGreeting(isGreeting);
+	}
+	private void setTodayDate(FDat languageAge) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		String ope = languageAge.getOpe();
+		String todayDate = "";
+		switch (ope) {
+			case "JAPAN", "KOREAN" -> {
+				ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
+				todayDate = LocalDateTime.now().format(dtf);
+//				韓国は日本と標準時刻が同じ
+			}
+			case "USA" -> {
 				ZonedDateTime.now(ZoneId.of("America/Los_Angeles"));
 				todayDate = LocalDateTime.now().format(dtf);
 			}
 			case "FRANCE" -> {
-				isGreeting = "ボンジュ〜ル！";
 				ZonedDateTime.now(ZoneId.of("Europe/Paris"));
 				todayDate = LocalDateTime.now().format(dtf);
 			}
-			case "KOREAN" -> {
-				isGreeting = "アニハセヨ〜！";
-				ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
-//			韓国は日本と時差がないため東京で設定
-				todayDate = LocalDateTime.now().format(dtf);
-			}
 		}
-		fdat.setIsGreeting(isGreeting);
-		fdat.setTodayDate(todayDate);
+		languageAge.setTodayDate(todayDate);
 	}
 }

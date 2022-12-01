@@ -7,8 +7,8 @@
 <body>
 <p>言語を選択後、年齢を入力して下さい。</p>
 
-<form th:action="@{/result}"
-      th:object="${fdat}" method="post">
+<form th:action="@{/self-introduction}"
+      th:object="${languageAge}" method="post">
     <select th:field="*{ope}">
         <option value="JAPAN">JAPAN</option>
         <option value="USA">USA</option>
