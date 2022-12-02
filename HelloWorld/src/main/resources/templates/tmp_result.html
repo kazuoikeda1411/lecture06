@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+</head>
+<body>
+<h2>出力結果</h2>
+</body>
+<p th:text="${languageAge.getGreeting()}+'私は'+${languageAge.getTodayDate()}+'現在'+${languageAge.getAge()}+'才です。'"></p>
+<a href="/languages-ages">入力へ戻る</a>
+</html>
