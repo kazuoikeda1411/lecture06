@@ -1,9 +1,9 @@
 package com.raisetech.HelloWorld.model;
 
-public class FDat {
+public class UserDate {
 	private int age = 0;
-	private String ope = "";
-	private String isGreeting = "";
+	private String country = "";
+	private String greeting = "";
 	private String todayDate = "";
 
 	public int getAge() {
@@ -12,17 +12,17 @@ public class FDat {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public String getOpe() {
-		return this.ope;
+	public String getCountry() {
+		return this.country;
 	}
-	public void setOpe(String ope) {
-		this.ope = ope;
+	public void setCountry(String country) {
+		this.country = country;
 	}
-	public String getIsGreeting() {
-		return this.isGreeting;
+	public String getGreeting() {
+		return this.greeting;
 	}
-	public void setIsGreeting(String isGreeting) {
-		this.isGreeting = isGreeting;
+	public void setGreeting(String greeting) {
+		this.greeting = greeting;
 	}
 	public String getTodayDate() {
 		return todayDate;
